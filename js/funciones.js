@@ -5,7 +5,8 @@ let mineCount = 30;// Cantidad de minas
 let PrimerClick;
 let MinasRestantes;
 let unrevealedSafeCells;
-let gameboard;
+let gameBoard;
+
 function principal(){
     filas = document.getElementById("filas").value;// Numero de filas
     columnas = document.getElementById("columnas").value;// Numero de columnas

@@ -6,9 +6,24 @@
     <meta charset="UTF-8">
 </head>
 <body>
-<h1>Buscaminas</h1>
-<div id="board"></div>
-<div id="estado"><div>Nº de minas restante: <span id="numMinasRestantes"></span></div></div>
+<div>
+    <h1>Buscaminas</h1>
+    <div id="board"></div>
+    <div id="estado"><div>Nº de minas restante: <span id="numMinasRestantes"></span></div></div>
+    <br>
+    <label for="minas">Minas</label>
+    <input id="minas" type="number" value="30"/>
+    <br>
+    <label for="columnas">Columnas</label>
+    <input id="columnas" type="number" value="12"/>
+    <br>
+    <label for="filas">Filas</label>
+    <input id="filas" type="number" value="12"/>
+    <br>
+    <button onclick="principal();">Generar</button>
+    <br>
+</div>
+
 <script src="js/funciones.js"></script>
 </body>
 </html>

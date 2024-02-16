@@ -1,27 +1,37 @@
-const board = document.getElementById("board");
-const filas = 8;
-const columnas = 12;// Tamaño del tablero
-const mineCount = 3; // Cantidad de minas
-let PrimerClick = true;
-let MinasRestantes = 0;
-let unrevealedSafeCells = (filas*columnas)-mineCount;
-let gameBoard = [];
+let board = document.getElementById("board");
+let filas = 12;// Numero de filas
+let columnas = 12;// Numero de columnas
+let mineCount = 30;// Cantidad de minas
+let PrimerClick;
+let MinasRestantes;
+let unrevealedSafeCells;
+let gameboard;
+function principal(){
+    filas = document.getElementById("filas").value;// Numero de filas
+    columnas = document.getElementById("columnas").value;// Numero de columnas
+    mineCount = document.getElementById("minas").value;// Cantidad de minas
+    PrimerClick = true;
+    MinasRestantes = 0;
+    unrevealedSafeCells = (filas*columnas)-mineCount;
+    gameBoard = [];
 
-document.querySelector(":root").style.setProperty("--num-filas", filas);
-document.querySelector(":root").style.setProperty("--num-columnas", columnas);
-createBoard();
-
-for (let row = 0; row < filas; row++) {
-    for (let col = 0; col < columnas; col++) {
-        const cell = document.createElement("div");
-        cell.classList.add("cell");
-        cell.dataset.row = row;
-        cell.dataset.col = col;
-        cell.addEventListener("click", handleClick);
-        cell.addEventListener("contextmenu", handleRightClick); // Agregar evento de clic derecho
-        board.appendChild(cell);
+    board.innerHTML="";
+    for (let row = 0; row < filas; row++) {
+        for (let col = 0; col < columnas; col++) {
+            const cell = document.createElement("div");
+            cell.classList.add("cell");
+            cell.dataset.row = row;
+            cell.dataset.col = col;
+            cell.addEventListener("click", handleClick);
+            cell.addEventListener("contextmenu", handleRightClick); // Agregar evento de clic derecho
+            board.appendChild(cell);
+        }
     }
+    document.querySelector(":root").style.setProperty("--num-filas", filas);
+    document.querySelector(":root").style.setProperty("--num-columnas", columnas);
+    createBoard();
 }
+
 
 function createBoard() {
     // Crea el tablero y llena con casillas vacías.
@@ -38,6 +48,8 @@ function createBoard() {
         gameBoard.push(rowArray);
     }
 }
+
+document.querySelector("#numMinasRestantes").innerHTML = (mineCount - MinasRestantes);
 
 function plantMines(r, c) {
     // Coloca minas en ubicaciones aleatorias.

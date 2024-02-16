@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="500" height="500"
+     viewBox="-50 -50 100 100">
+    <defs>
+        <radialGradient id="gradiente" cx="0.45" cy="0.45">
+            <stop stop-color="gray" offset="0%"/>
+            <stop stop-color="gray" offset="30%"/>
+            <stop stop-color="black" offset="100%"/>
+        </radialGradient>
+        <radialGradient id="gradiente1">
+            <stop stop-color="gray" offset="0%"/>
+            <stop stop-color="black" offset="100%"/>
+        </radialGradient>
+        <linearGradient id="gradiente2">
+            <stop stop-color="black" offset="0%"/>
+            <stop stop-color="gray" offset="50%"/>
+            <stop stop-color="black" offset="100%"/>
+        </linearGradient>
+
+        <g id="a" fill="black" transform="translate(0 -4)">
+            <circle r="5" cy="-37" fill="url(#gradiente1)"/>
+            <circle r="5" cy="-22" fill="url(#gradiente1)"/>
+            <rect x="-5" y="-37" width="10" height="15" fill="url(#gradiente2)"/>
+        </g>
+    </defs>
+
+    <circle r="30" fill="url(#gradiente)"/>
+    <use xlink:href="#a"/>
+    <use xlink:href="#a" transform="rotate(45)"/>
+    <use xlink:href="#a" transform="rotate(90)"/>
+    <use xlink:href="#a" transform="rotate(135)"/>
+    <use xlink:href="#a" transform="rotate(180)"/>
+    <use xlink:href="#a" transform="rotate(225)"/>
+    <use xlink:href="#a" transform="rotate(270)"/>
+    <use xlink:href="#a" transform="rotate(315)"/>
+
+    <circle r="6" fill="url(#gradiente1)"/>
+</svg>

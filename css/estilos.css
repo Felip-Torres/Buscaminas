@@ -38,13 +38,6 @@
 	border-bottom: 1px solid #D3D3D3;
 	text-shadow: 1px 1px 2px #999999;
 }
-#board div.sinmarcar{
-	background-color: #FF0000;
-}
-#board div.banderaErronea{
-	background-color: #AAAAAA;
-	border: 1px solid #B22222;
-}
 
 #estado{
 	padding: 2px 10px 2px 10px;
@@ -111,6 +104,9 @@
 
 }
 
-.icon-bandera:before { content: '\e800';  color: #B22222;}
+.icon-bandera:before { background-image: url("flag.svg")}
 .icon-duda:before { content: '\e801'; }
-.icon-bomba:before { content: '\f1e2'; }
+.icon-bomba:before {
+	content: '';
+	background-color: red;
+}

@@ -6,11 +6,12 @@ let PrimerClick;
 let MinasRestantes;
 let unrevealedSafeCells;
 let gameBoard;
+principal();
 
 function principal(){
-    filas = document.getElementById("filas").value;// Numero de filas
-    columnas = document.getElementById("columnas").value;// Numero de columnas
-    mineCount = document.getElementById("minas").value;// Cantidad de minas
+    if(document.getElementById("filas").value > 2)filas = document.getElementById("filas").value;else alert("")// Numero de filas
+    if(document.getElementById("columnas").value > 4)columnas = document.getElementById("columnas").value;// Numero de columnas
+    if(document.getElementById("minas").value<filas*columnas)mineCount = document.getElementById("minas").value;// Cantidad de minas
     PrimerClick = true;
     MinasRestantes = 0;
     unrevealedSafeCells = (filas*columnas)-mineCount;
@@ -30,6 +31,7 @@ function principal(){
     }
     document.querySelector(":root").style.setProperty("--num-filas", filas);
     document.querySelector(":root").style.setProperty("--num-columnas", columnas);
+    document.querySelector("#numMinasRestantes").innerHTML = (mineCount - MinasRestantes);
     createBoard();
 }
 
@@ -94,8 +96,7 @@ function revealCell(row, col) {
 
 
     if (cell.isMine) {
-        cellElement.innerHTML = '&#128163;'; // Unicode del símbolo de la bomba
-        cellElement.style.backgroundColor = "red"; // Unicode del símbolo de la bomba
+        cellElement.classList.add('icon-bomba'); // Unicode del símbolo de la bomba
         alert("has perdut");
         desabilitar();
     } else if (cell.neighbors === 0) {

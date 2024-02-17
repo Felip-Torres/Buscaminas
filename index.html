@@ -6,9 +6,32 @@
     <meta charset="UTF-8">
 </head>
 <body>
-<h1>Buscaminas</h1>
-<div id="board"></div>
-<div id="estado"><div>Nº de minas restante: <span id="numMinasRestantes"></span></div></div>
+    <div>
+        <h1>Buscaminas</h1>
+        <div id="board"></div>
+            <audio id="bubbleSound" src="bubble.mp3" preload="auto"></audio>
+            <audio id="explosionAudio" preload="auto">
+                <source src="large-underwater-explosion-190270.mp3" type="audio/mpeg">
+            </audio>
+            <video id="video" onended="videoEnded()" preload="auto">
+                <source src="explosion-16640.mp4" type="video/mp4">
+            </video>
+        <div id="estado"><div>Nº de minas restante: <span id="numMinasRestantes"></span></div></div>
+        <br>
+        <div id="divgenerar">
+            <label for="minas">Minas</label>
+            <input id="minas" type="number" value="30"/>
+                <br>
+            <label for="columnas">Columnas</label>
+            <input id="columnas" type="number" value="12"/>
+                <br>
+            <label for="filas">Filas</label>
+            <input id="filas" type="number" value="12"/>
+                <br>
+            <button id="generar"onclick="principal();">Generar / Reiniciar</button>
+                <br>
+        </div>
+    </div>
 <script src="js/funciones.js"></script>
 </body>
 </html>

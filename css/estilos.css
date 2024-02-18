@@ -169,7 +169,7 @@
             text-shadow: 2px 2px 2px #999999;
         }
 
-        .icon-bandera:before { content: '🚩'; color: #B22222; }
+        .icon-bandera:before { content: url("flag.svg"); z-index: 1; }
         .icon-duda:before { content: '\e801'; }
         .icon-bomba:before { content: '\f1e2'; }
 

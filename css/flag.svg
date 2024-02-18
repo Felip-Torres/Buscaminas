@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink"
-     width="500" height="500"
-     viewBox="-50 -50 100 100">
+     width="25" height="25"
+     viewBox="-25 -25 50 50">
     <defs>
         <radialGradient id="gradiente" cy="0.45">
             <stop stop-color="gray" offset="0%"/>
@@ -25,11 +25,11 @@
         </linearGradient>
     </defs>
 
-    <path d="M -19 -36 c 18 -4 37 22 44 12 c -3 15 -30 3 -44 17 z" fill="url(#gradiente3)" stroke="#400" stroke-width="0.2"/>
+    <path d="M -8 -18 c 9 -2 18.5 11 22 6 c -1.5 7 -15 1.5 -22 8.5 z" fill="url(#gradiente3)" stroke="#400" stroke-width="0.2"/>
 
-    <g id="a" fill="black" transform="translate(-23 0)">
-        <circle r="4" cy="33" fill="url(#gradiente1)"/>
-        <rect x="-4" y="-37" width="8" height="70" fill="url(#gradiente2)"/>
-        <circle r="5" cy="-37" fill="url(#gradiente)"/>
+    <g id="a" fill="black" transform="translate(-10 0)">
+        <circle r="2" cy="18.5" fill="url(#gradiente1)"/>
+        <rect x="-2" y="-16.5" width="4" height="35" fill="url(#gradiente2)"/>
+        <circle r="2.5" cy="-17.5" fill="url(#gradiente)"/>
     </g>
 </svg>

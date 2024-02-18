@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="25" height="25"
+     viewBox="-50 -50 100 100">
+    <defs>
+        <radialGradient id="gradiente">
+            <stop stop-color="red" offset="0%"/>
+            <stop stop-color="red" offset="70%"/>
+            <stop stop-color="#800" offset="100%"/>
+        </radialGradient>
+        <radialGradient id="gradiente1">
+            <stop stop-color="lightgray" offset="0%"/>
+            <stop stop-color="lightgray" offset="60%"/>
+            <stop stop-color="#6c6c6c" offset="100%"/>
+        </radialGradient>
+        <linearGradient id="gradiente2">
+            <stop stop-color="gray" offset="0%"/>
+            <stop stop-color="white" offset="50%"/>
+            <stop stop-color="gray" offset="100%"/>
+        </linearGradient>
+        <linearGradient id="gradiente3">
+            <stop stop-color="#800" offset="0%"/>
+            <stop stop-color="red" offset="50%"/>
+            <stop stop-color="#800" offset="100%"/>
+        </linearGradient>
+    </defs>
+
+<!--
+    <rect x="-50" y="-50" width="100" height="100" fill="lime"/>
+-->
+
+    <ellipse rx="30" ry="17" cy="7" fill="url(#gradiente2)" stroke="black"/>
+    <rect x="-30.5" y="-7" width="61" height="14" fill="black"/>
+    <rect x="-29.5" y="-7" width="59" height="14.5" fill="url(#gradiente2)"/>
+    <ellipse rx="30" ry="17" cy="-7" fill="url(#gradiente1)" stroke="black"/>
+
+    <ellipse rx="21" ry="10" cy="-8 " fill="url(#gradiente3)" stroke="black"/>
+    <rect x="-21.5" y="-13" width="43" height="5" fill="black"/>
+    <rect x="-20.5" y="-13" width="41" height="5" fill="url(#gradiente3)"/>
+    <ellipse rx="21" ry="10" cy="-13" fill="url(#gradiente)" stroke="black"/>
+</svg>

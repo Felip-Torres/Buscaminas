@@ -5,17 +5,17 @@
      viewBox="-25 -25 50 50">
     <defs>
         <radialGradient id="gradiente" cy="0.45">
-            <stop stop-color="gray" offset="0%"/>
-            <stop stop-color="black" offset="100%"/>
+            <stop stop-color="gold" offset="0%"/>
+            <stop stop-color="saddlebrown" offset="100%"/>
         </radialGradient>
         <radialGradient id="gradiente1">
-            <stop stop-color="gray" offset="0%"/>
-            <stop stop-color="black" offset="100%"/>
+            <stop stop-color="white" offset="0%"/>
+            <stop stop-color="#444" offset="100%"/>
         </radialGradient>
         <linearGradient id="gradiente2">
-            <stop stop-color="black" offset="0%"/>
-            <stop stop-color="gray" offset="50%"/>
-            <stop stop-color="black" offset="100%"/>
+            <stop stop-color="#444" offset="0%"/>
+            <stop stop-color="white" offset="50%"/>
+            <stop stop-color="#444" offset="100%"/>
         </linearGradient>
         <linearGradient id="gradiente3">
             <stop stop-color="#400" offset="0%"/>
@@ -25,10 +25,11 @@
         </linearGradient>
     </defs>
 
-    <path d="M -8 -18 c 9 -2 18.5 11 22 6 c -1.5 7 -15 1.5 -22 8.5 z" fill="url(#gradiente3)" stroke="#400" stroke-width="0.2"/>
+    <path d="M -8 -16.5 c 9 -2 18.5 11 22 6 c -1.5 7 -15 1.5 -22 8.5 z" fill="url(#gradiente3)" stroke="#400" stroke-width="0.2"/>
 
     <g id="a" fill="black" transform="translate(-10 0)">
-        <circle r="2" cy="18.5" fill="url(#gradiente1)"/>
+        <ellipse rx="4" ry="2.5" cy="19" fill="black"/>
+        <ellipse rx="2" ry="1.25" cy="18.5" fill="url(#gradiente2)"/>
         <rect x="-2" y="-16.5" width="4" height="35" fill="url(#gradiente2)"/>
         <circle r="2.5" cy="-17.5" fill="url(#gradiente)"/>
     </g>

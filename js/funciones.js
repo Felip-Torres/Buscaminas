@@ -12,7 +12,12 @@ let unrevealedSafeCells; //Variable que guarda el numero de casillas sin minas q
 function videoEnded() {
     document.getElementById('video').style.display = 'none'; // Ocultar el video cuando termine
 }
-
+function estilo0(){
+    document.querySelector(":root").style.setProperty("--mina", 'url("mina.svg")');
+}
+function estilo1(){
+    document.querySelector(":root").style.setProperty("--mina", 'url("mina1.svg")');
+}
 principal();//generara la primera partida con los valores pordefecto
 
 //Funcion para iniciar una partida
@@ -40,11 +45,10 @@ function principal(){
     for (let row = 0; row < filas; row++) {
         for (let col = 0; col < columnas; col++) {
             const cell = document.createElement("div");
-            cell.classList.add("cell");
             cell.dataset.row = row;
             cell.dataset.col = col;
             cell.addEventListener("click", handleClick);
-            cell.addEventListener("contextmenu", handleRightClick); // Agregar evento de clic derecho
+            cell.addEventListener("contextmenu", toggleFlag); // Agregar evento de clic derecho
             board.appendChild(cell);
         }
     }
@@ -63,7 +67,7 @@ function createBoard() {
             rowArray.push({
                 isMine: false,
                 isRevealed: false,
-                isFlagged: false,
+                isFlagged: 0,
                 neighbors: 0
             });
         }
@@ -83,21 +87,31 @@ function plantMines(r, c) {
     }
 }
 
-function desabilitar(){
-    let aCasillas = board.children;
-    for (let i = 0 ; i < aCasillas.length; i++) {
-        //quitamos los listeners de los eventos a las casillas
-        aCasillas[i].removeEventListener("click", handleClick);
-        aCasillas[i].removeEventListener("contextmenu", handleRightClick);
-    }
 
+function calculateNeighbors() {
+    // Calcula el número de minas vecinas para cada casilla.
+    for (let row = 0; row < filas; row++) {
+        for (let col = 0; col < columnas; col++) {
+            if (gameBoard[row][col].isMine) {
+                continue;
+            }
+
+            for (let r = row - 1; r <= row + 1; r++) {
+                for (let c = col - 1; c <= col + 1; c++) {
+                    if (r >= 0 && c >= 0 && r < filas && c < columnas && gameBoard[r][c].isMine) {
+                        gameBoard[row][col].neighbors++;
+                    }
+                }
+            }
+        }
+    }
 }
 
 function revealCell(row, col) {
     if (row < 0 || col < 0 || row >= filas || col >= columnas) return; // Evita desbordamiento del tablero.
 
-    const cell = gameBoard[row][col]; //Creamos una constante con las propiedades de la casilla en esta fila y columna
-    if (cell.isRevealed || cell.isFlagged)return; // No revelamos una casilla ya revelada o con bandera.
+    let cell = gameBoard[row][col]; //Creamos una variable con las propiedades de la casilla en esta fila y columna
+    if (cell.isRevealed || cell.isFlagged === 1)return; // No revelamos una casilla ya revelada o con bandera.
     cell.isRevealed = true;
     if(PrimerClick){
         plantMines(row, col);
@@ -105,21 +119,23 @@ function revealCell(row, col) {
         PrimerClick=false;
     }
 
-    const cellElement = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+    let cellElement = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
     cellElement.classList.add('destapado');
 
 
     if (cell.isMine) {
-        cellElement.classList.add('icon-bomba'); // Unicode del símbolo de la bomba
+        cellElement.classList.add("icon-mina");
+        cellElement.style.backgroundColor = "red"; // Unicode del símbolo de la bomba
         desabilitar();
         // Revelar todas las minas
         for (let r = 0; r < filas; r++) {
             for (let c = 0; c < columnas; c++) {
                 if (gameBoard[r][c].isMine) {
-                    const mineCell = document.querySelector(`[data-row="${r}"][data-col="${c}"]`);
-                    mineCell.classList.add('destapado');
-                    mineCell.classList.add('icon-bomba');
-                    mineCell.style.backgroundColor = "red";
+                    cell = gameBoard[r][c];
+                    cellElement = document.querySelector(`[data-row="${r}"][data-col="${c}"]`);
+                    cellElement.classList.add('destapado');
+                    if(cell.isFlagged === 0)cellElement.classList.add("icon-mina");
+                    cellElement.style.backgroundColor = "red";
                 }
             }
         }
@@ -147,50 +163,46 @@ function revealCell(row, col) {
     bubbleSound.play();
 }
 
-function calculateNeighbors() {
-    // Calcula el número de minas vecinas para cada casilla.
-    for (let row = 0; row < filas; row++) {
-        for (let col = 0; col < columnas; col++) {
-            if (gameBoard[row][col].isMine) {
-                continue;
-            }
-
-            for (let r = row - 1; r <= row + 1; r++) {
-                for (let c = col - 1; c <= col + 1; c++) {
-                    if (r >= 0 && c >= 0 && r < filas && c < columnas && gameBoard[r][c].isMine) {
-                        gameBoard[row][col].neighbors++;
-                    }
-                }
-            }
-        }
-    }
-}
-
 function checkWin() {
-    // Verifica si el jugador ha ganado.
     // El jugador gana si todas las casillas no minadas están reveladas.
-
     if (unrevealedSafeCells === 0) {
         alert("has guanyat");// Muestra un mensaje de victoria.
         desabilitar();
     }
 }
 
-function toggleFlag(row, col) {
+function desabilitar(){
+    let aCasillas = board.children;
+    for (let i = 0 ; i < aCasillas.length; i++) {
+        //quitamos los listeners de los eventos a las casillas
+        aCasillas[i].removeEventListener("click", handleClick);
+        aCasillas[i].removeEventListener("contextmenu", toggleFlag);
+    }
+
+}
+
+function toggleFlag(event) {
+    event.preventDefault();// Evitar el menú contextual del botón derecho
+    const row = parseInt(event.target.dataset.row);
+    const col = parseInt(event.target.dataset.col);
     const cell = gameBoard[row][col];
     const cellElement = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
 
     if (!cell.isRevealed) {
-        if (!cell.isFlagged) {
+        if (cell.isFlagged===0) {
             if (MinasEncontradas<mineCount){
                 MinasEncontradas++;
-                cellElement.classList.add('icon-bandera'); // Agregar clase para mostrar la bandera
-                cell.isFlagged = !cell.isFlagged;// Cambiar el estado de la bandera
+                cellElement.classList.add("icon-bandera"); // Agregar bandera
+                cell.isFlagged = 1;// Cambiar el estado a bandera(1)
             }
-        } else {
-            cellElement.classList.remove('icon-bandera'); // Remover clase para quitar la bandera
+        } else if(cell.isFlagged === 1){
+            cellElement.classList.remove("icon-bandera");
+            cellElement.classList.add("icon-duda"); // cambiar a interogante
             MinasEncontradas--;
-            cell.isFlagged = !cell.isFlagged;// Cambiar el estado de la bandera
+            cell.isFlagged = 2;// Cambiar el estado a interrogante(2)
+        }else{
+            cellElement.classList.remove("icon-duda");// Remover interrogante
+            cell.isFlagged = 0;// Cambiar el estado a vacio(0)
         }
     }
     document.querySelector("#numMinasRestantes").innerHTML = (mineCount - MinasEncontradas);
@@ -204,11 +216,3 @@ function handleClick(event) {
     checkWin();
 }
 
-function handleRightClick(event) {
-    event.preventDefault(); // Evitar el menú contextual del botón derecho
-
-    const row = parseInt(event.target.dataset.row);
-    const col = parseInt(event.target.dataset.col);
-
-    toggleFlag(row, col);
-}

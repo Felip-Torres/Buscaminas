@@ -14,22 +14,26 @@
                 <source src="large-underwater-explosion-190270.mp3" type="audio/mpeg">
             </audio>
             <video id="video" onended="videoEnded()" preload="auto">
-                <source src="explosion-16640.mp4" type="video/mp4">
+                <source src="explosion-16640.webm" type="video/mp4">
             </video>
         <div id="estado"><div>Nº de minas restante: <span id="numMinasRestantes"></span></div></div>
         <br>
         <div id="divgenerar">
             <label for="minas">Minas</label>
             <input id="minas" type="number" value="30"/>
-                <br>
+            <br>
             <label for="columnas">Columnas</label>
             <input id="columnas" type="number" value="12"/>
-                <br>
+            <br>
             <label for="filas">Filas</label>
             <input id="filas" type="number" value="12"/>
-                <br>
+            <br>
             <button id="generar"onclick="principal();">Generar / Reiniciar</button>
-                <br>
+            <br>
+            <button id="estilo0"onclick="estilo0();">Estilo0</button>
+            <br>
+            <button id="estilo1"onclick="estilo1();">Estilo1</button>
+            <br>
         </div>
     </div>
 <script src="js/funciones.js"></script>

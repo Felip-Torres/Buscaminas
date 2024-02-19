@@ -8,6 +8,29 @@ let PrimerClick; //Variable booleana que almacena si en esta partida sea revelad
 let MinasEncontradas; //Variable que guestiona cuantos banderirenes hay colocados
 let unrevealedSafeCells; //Variable que guarda el numero de casillas sin minas que faltan por revelar
 
+let temporizador; // Temporizador
+let tiempo = 0; // Tiempo en segundos
+
+// FUNCIONES PARA EL TEMPORIZADOR
+function iniciarTemporizador() {
+    tiempo = 0;
+    document.getElementById("tiempo").innerHTML = tiempo;
+    temporizador = setInterval(function() {
+        tiempo++;
+        document.getElementById("tiempo").innerHTML = tiempo;
+    }, 1000);
+}
+
+function detenerTemporizador() {
+    clearInterval(temporizador);
+}
+
+function reiniciarTemporizador() {
+    detenerTemporizador();
+    tiempo = 0;
+    document.getElementById("tiempo").innerHTML = tiempo;
+}
+
 //funcion que ejecutara el video cuando acabe de reproducirse.
 function videoEnded() {
     document.getElementById('video').style.display = 'none'; // Ocultar el video cuando termine
@@ -55,6 +78,8 @@ function principal(){
     document.querySelector(":root").style.setProperty("--num-filas", filas);
     document.querySelector(":root").style.setProperty("--num-columnas", columnas);
     document.querySelector("#numMinasRestantes").innerHTML = (mineCount - MinasEncontradas);
+    // reinicia temporizador al crear una tabla nueva 
+    reiniciarTemporizador(); // Reiniciar temporizador    
     createBoard();
 }
 
@@ -117,6 +142,7 @@ function revealCell(row, col) {
         plantMines(row, col);
         calculateNeighbors();
         PrimerClick=false;
+        iniciarTemporizador();
     }
 
     let cellElement = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
@@ -126,6 +152,7 @@ function revealCell(row, col) {
     if (cell.isMine) {
         cellElement.classList.add("icon-mina");
         cellElement.style.backgroundColor = "red"; // Unicode del símbolo de la bomba
+        detenerTemporizador(); // Detener temporizador
         desabilitar();
         // Revelar todas las minas
         for (let r = 0; r < filas; r++) {
@@ -167,6 +194,7 @@ function checkWin() {
     // El jugador gana si todas las casillas no minadas están reveladas.
     if (unrevealedSafeCells === 0) {
         alert("has guanyat");// Muestra un mensaje de victoria.
+        detenerTemporizador(); // Detener temporizador
         desabilitar();
     }
 }
